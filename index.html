@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Ann.gular</title>
+    <title>trellolo</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 
   <body ng-controller="BoardCtrl">
     
-    <nav ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -53,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Ann.Gular</a>
+          <a class="navbar-brand" href="#">trellolo</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <!-- Place username and logout button here. -->
@@ -66,45 +66,53 @@
   </body>
 
   <script type="text/ng-template" id="/board.html">
-    <div ng-controller="SortableCtrl" class="container">
+    <div class="container">
 
       <div class="row">
 
-        <div ui-sortable class="col-md-4">
+        <div class="col-md-4">
           <h2>Backlog</h2>
           <p>
-            <button ng-click="addBacklogStory()" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button type="button" class="btn btn-default btn-sm">Clear Board</button>
+            <button ng-click="addStory('backlog', sortedStories['backlog'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+            <button ng-click="clearBoard('backlog')" type="button" class="btn btn-default btn-sm">Clear Board</button>
           </p>
-          <div ui-sortable>
-            <card-box ng-repeat="story in stories | filter:{ status: 'backlog' }" remove="removeStory" story="story"></card-box>
+          <div ui-sortable="sortableStories[0]" ng-model="sortedStories['backlog']" class="story-container">
+            <card-box ng-repeat="story in sortedStories['backlog'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
           </div>
         </div>
 
-        <div ui-sortable class="col-md-4">
+        <div class="col-md-4">
           <h2>In Progress</h2>
           <p>
-            <button ng-click="addInProgressStory()" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button type="button" class="btn btn-default btn-sm">Clear Board</button>
+            <button ng-click="addStory('in_progress', sortedStories['in_progress'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+            <button ng-click="clearBoard('in_progress')" type="button" class="btn btn-default btn-sm">Clear Board</button>
           </p>
-          <div ui-sortable>
-            <card-box ng-repeat="story in stories | filter:{ status: 'in_progress' }" remove="removeStory" story="story"></card-box>
+          <div ui-sortable="sortableStories[1]" ng-model=" sortedStories['in_progress']" class="story-container">
+            <card-box ng-repeat="story in sortedStories['in_progress'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
           </div>
        </div>
 
-        <div ui-sortable class="col-md-4">
+        <div class="col-md-4">
           <h2>Done</h2>
           <p>
-            <button ng-click="addDoneStory()" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button type="button" class="btn btn-default btn-sm">Clear Board</button>
+            <button ng-click="addStory('done', sortedStories['done'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+            <button ng-click="clearBoard('done')" type="button" class="btn btn-default btn-sm">Clear Board</button>
           </p>
-          <div ui-sortable>
-            <card-box ng-repeat="story in stories | filter:{ status: 'done' }" remove="removeStory" story="story"></card-box>
+          <div ui-sortable="sortableStories[2]" ng-model="sortedStories['done']" class="story-container">
+            <card-box ng-repeat="story in sortedStories['done'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
           </div>
         </div>
 
       </div>
     </div> <!-- /container -->
+    <footer class="footer"> <!-- footer -->
+      <div class="container">
+        <button ng-click="judiciousPurging()" type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+        <deleted-card-box ng-repeat="story in sortedStories['deleted']" story="story" remove="removeStory"></deleted-card-box>
+      </div>
+    </footer> <!-- /footer -->
   </script>
 
   <script type="text/ng-template" id="/stories.html">
@@ -114,13 +122,14 @@
   <script type="text/ng-template" id="/card.html">
     <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="alert alert-warning {{color}}">
       
-      <button ng-show="show"  ng-click="removeStory(story)" type="button" class="close" data-dismiss="alert">
+      <button ng-show="show" ng-click="trashStory(story)" type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
       
       {{story.color}}
       {{story.status}}
+      {{story.rank}}
 
       <div ng-hide="titleEdit" class="ng-hide card-title">
         <h4>{{ story.title }}</h4>
@@ -156,4 +165,9 @@
     </div>
   </script>  
 
+  <script type="text/ng-template" id="/deleted_card.html">
+    <div>
+      {{story.title}} - {{story.status}} <span ng-click="removeStory(story)">Delete Me</span>
+    </div>
+  </script>
 </html>

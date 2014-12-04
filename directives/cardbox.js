@@ -2,16 +2,11 @@ var appDirectives = angular.module('appDirectives', []);
 
 appDirectives.directive('cardBox', function() {
   return {
-    restrict: 'EA',
+    restrict: 'E',
     replace: true,
     scope: {
-      /*title: '=',
-      content: '=',
-      color: '=',
-      status: '=',
-      rank: '='*/
       story: '=',
-      remove: '&'
+      trash: '&'
     },
     templateUrl: '/card.html',
     controller: function($scope, $element) {
@@ -52,12 +47,38 @@ appDirectives.directive('cardBox', function() {
         $scope.story.color = color;
       }
 
-      $scope.removeStory = function(story) {
-        $scope.remove()(story);
+      $scope.trashStory = function(story) {
+        $scope.story.status = 'deleted';
+        $scope.trash()(story);
       }
     },
     link: function(scope, element, attr, controller) {
-      
+      // Handle clearing the board by manually deleting the card directive
+      // Find a better way to implement this next century
+      scope.$watch('story.status', function(val) {
+        if(val == 'deleted') {
+          $(element).alert('close');
+        }
+      });
+    } 
+  };
+});
+
+appDirectives.directive('deletedCardBox', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      story: '=',
+      remove: '&'
+    },
+    templateUrl: '/deleted_card.html',
+    controller: function($scope, $element) {
+
+      $scope.removeStory = function(story) {
+        $scope.remove()(story);
+      }
+
     } 
   };
 });
