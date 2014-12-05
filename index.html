@@ -190,11 +190,9 @@
 
   <script type="text/ng-template" id="/deleted_card.html">
     <div class="col-md-2 deleted-card">
-      <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="tile">
-        <h6>
-          {{story.title}}
-          <span ng-click="removeStory(story)" ng-show="show" class="glyphicon glyphicon-trash"></span>
-        </h6>
+      <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="card-tile">
+        <p class="pull-left">{{story.title}}</p>
+        <span ng-click="removeStory(story)" ng-show="show" class="glyphicon glyphicon-trash pull-right trash-icon"></span>
       </div>
     </div>
   </script>

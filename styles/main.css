@@ -168,23 +168,20 @@
 
 .deleted-card {
   margin: 0;
-  padding: 0 5px; 
 }
 
-.deleted-card .tile {
-  padding: 5px;
+.deleted-card .card-tile {
+  padding: 25px 15px 43px 15px;
   background-color: #34495E;
   border: 1px solid ##7F8C8D;
-  text-align: left;
+  border-radius: 8px;
 }
 
-.deleted-card .tile h6 {
+.deleted-card .card-tile span {
   font-size: 15px;
   padding-left: 10px;
 }
 
-.deleted-card .tile h6 > span{
-  float: right;
-  padding-right: 10px;
+.deleted-card .card-tile span.trash-icon {
   cursor: pointer;
 }

@@ -71,8 +71,10 @@ appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage',
 				return;
 			}
 
-  		angular.forEach($scope.sortedStories[status], function(obj) {
-  			$scope.trashStory(obj);
+      var clearedStories = $scope.sortedStories[status];
+      $scope.sortedStories[status] = [];
+  		_.each(clearedStories, function(story) {
+  			$scope.trashStory(story);
   		});
   	}
 
