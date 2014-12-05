@@ -1,18 +1,33 @@
-/* Layout Styling */
+/* Overall styles
+-------------------------------------------------- */
+html {
+  background: #34495E;
+  position: relative;
+  min-height: 100%;
+}
 
+textarea { 
+  resize:vertical; 
+}
+
+/* Container row styles
+-------------------------------------------------- */
+/*.container {
+   background: #34495E;
+}
+*/
 .row {
-	margin-top: 5%;
+  margin-top: 5%;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+
+  background-color: #34495E !important;
+
 }
 
 .footer {
@@ -21,5 +36,15 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 100px;
-  background-color: #f5f5f5;
+  background-color: #ECF0F1;
+}
+
+/* Nav bar styles
+-------------------------------------------------- */
+.navbar {
+  background-color: #2C3E50;
+}
+
+.navbar-brand {
+  color: #F1C40F;
 }

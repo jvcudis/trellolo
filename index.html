@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>trellolo</title>
 
@@ -15,7 +14,18 @@
     <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/layout.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
-      
+
+    <!-- Flat UI -->
+    <link href="vendors/flatui/css/flat-ui.css" rel="stylesheet">
+    <link href="vendors/flatui/img/favicon.ico" rel="shortcut icon">
+
+    <!-- Flatby UI -->
+    <!-- <link href="vendors/flatby/stylesheets/screen.css" rel="stylesheet">
+    <link href="vendors/flatby/stylesheets/fonts.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+     -->  
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,8 +54,8 @@
 
   <body ng-controller="BoardCtrl">
     
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
+    <nav class="navbar navbar navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -66,48 +76,54 @@
   </body>
 
   <script type="text/ng-template" id="/board.html">
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="row">
 
         <div class="col-md-4">
-          <h2>Backlog</h2>
-          <p>
-            <button ng-click="addStory('backlog', sortedStories['backlog'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button ng-click="clearBoard('backlog')" type="button" class="btn btn-default btn-sm">Clear Board</button>
-          </p>
-          <div ui-sortable="sortableStories[0]" ng-model="sortedStories['backlog']" class="story-container">
-            <card-box ng-repeat="story in sortedStories['backlog'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
+          <div class="board">
+            <h4>Backlog</h4>
+            <p>
+              <button ng-click="addStory('backlog', sortedStories['backlog'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+              <button ng-click="clearBoard('backlog')" type="button" class="btn btn-default btn-sm">Clear Board</button>
+            </p>
+            <div ui-sortable="sortableStories[0]" ng-model="sortedStories['backlog']" class="story-container">
+              <card-box ng-repeat="story in sortedStories['backlog'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
+            </div>
           </div>
         </div>
 
         <div class="col-md-4">
-          <h2>In Progress</h2>
-          <p>
-            <button ng-click="addStory('in_progress', sortedStories['in_progress'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button ng-click="clearBoard('in_progress')" type="button" class="btn btn-default btn-sm">Clear Board</button>
-          </p>
-          <div ui-sortable="sortableStories[1]" ng-model=" sortedStories['in_progress']" class="story-container">
-            <card-box ng-repeat="story in sortedStories['in_progress'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
+          <div class="board">
+            <h4>In Progress</h4>
+            <p>
+              <button ng-click="addStory('in_progress', sortedStories['in_progress'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+              <button ng-click="clearBoard('in_progress')" type="button" class="btn btn-default btn-sm">Clear Board</button>
+            </p>
+            <div ui-sortable="sortableStories[1]" ng-model=" sortedStories['in_progress']" class="story-container">
+              <card-box ng-repeat="story in sortedStories['in_progress'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
+            </div>
           </div>
        </div>
 
         <div class="col-md-4">
-          <h2>Done</h2>
-          <p>
-            <button ng-click="addStory('done', sortedStories['done'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
-            <button ng-click="clearBoard('done')" type="button" class="btn btn-default btn-sm">Clear Board</button>
-          </p>
-          <div ui-sortable="sortableStories[2]" ng-model="sortedStories['done']" class="story-container">
-            <card-box ng-repeat="story in sortedStories['done'] | orderBy: ['rank']" story="story" trash="trashStory" class="story"></card-box>
+          <div class="board">
+            <h4>Done</h4>
+            <p>
+              <button ng-click="addStory('done', sortedStories['done'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
+              <button ng-click="clearBoard('done')" type="button" class="btn btn-default btn-sm">Clear Board</button>
+            </p>
+            <div ui-sortable="sortableStories[2]" ng-model="sortedStories['done']" class="story-container">
+              <card-box ng-repeat="story in sortedStories['done'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
+            </div>
           </div>
         </div>
 
       </div>
     </div> <!-- /container -->
     <footer class="footer"> <!-- footer -->
-      <div class="container">
-        <button ng-click="judiciousPurging()" type="button" class="btn btn-default btn-lg">
+      <div class="container-fluid">
+        <button ng-click="judiciousPurging()" type="button" class="btn btn-default btn-lg btn-trash">
           <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         </button>
         <deleted-card-box ng-repeat="story in sortedStories['deleted']" story="story" remove="removeStory"></deleted-card-box>
@@ -120,48 +136,57 @@
   </script>
 
   <script type="text/ng-template" id="/card.html">
-    <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="alert alert-warning {{color}}">
+    <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="story alert alert-warning {{story.color}}-card">
       
       <button ng-show="show" ng-click="trashStory(story)" type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
-      
-      {{story.color}}
-      {{story.status}}
-      {{story.rank}}
 
-      <div ng-hide="titleEdit" class="ng-hide card-title">
-        <h4>{{ story.title }}</h4>
-        <span ng-show="show" ng-click="editTitle()" class="glyphicon glyphicon-pencil"></span>
+      <div class="card-title">
+        <div ng-hide="titleEdit" class="ng-hide title-text">
+          <h6>
+            {{ story.title }} &nbsp;&nbsp;
+            <span ng-show="show" ng-click="editTitle()" class="glyphicon glyphicon-pencil"></span>
+          </h6>
+        </div>
+        
+        <div ng-show="titleEdit" class="title-form">
+          <div class="form-group col-md-8 form-group-sm" ng-class="{'has-error': card.title == '' }">
+            <input ng-model="card.title" type="text" class="form-control input-sm">
+            <span class="error" ng-show="card.title == ''">
+              Title is required.
+            </span>
+          </div>
+          <button ng-click="saveTitle(title)" ng-disabled="card.title == ''" type="button" class="btn btn-primary btn-xs">Save</button>
+          <button ng-click="cancelTitle()" type="button" class="btn btn-default btn-xs">Cancel</button>
+        </div>
       </div>
-      
-      <div ng-show="titleEdit" class="card-title">
-        <input ng-model="card.title" type="text" class="form-control">
-        <button ng-click="saveTitle(title)" type="button" class="btn btn-primary btn-sm">Save</button>
-        <button ng-click="cancelTitle()" type="button" class="btn btn-default btn-sm">Cancel</button>
+     
+      <div class="card-content">
+        <div ng-hide="contentEdit" class="ng-hide content-text">
+          <p>
+            {{ story.content }}  &nbsp;&nbsp;
+            <span ng-show="show" ng-click="editContent()" class="glyphicon glyphicon-pencil"></span>
+          </p>
+        </div>
+        
+        <div ng-show="contentEdit" class="content-form">
+          <div class="form-group form-group-sm">
+            <textarea ng-model="card.content" class="form-control" rows="3"></textarea>
+          </div>
+          <button ng-click="saveContent(content)" type="button" class="btn btn-primary btn-xs">Save</button>
+          <button ng-click="cancelContent()" type="button" class="btn btn-default btn-xs">Cancel</button>
+        </div>
       </div>
-      
+
       <div ng-show="show" class="card-color">
-        <span ng-click="changeColor('red')" class="label label-danger">HIGH</span>
-        <span ng-click="changeColor('blue')" class="label label-primary">MID</span>
-        <span ng-click="changeColor('green')" class="label label-success">LOW</span>
-        <span ng-click="changeColor('yellow')" class="label label-warning">SOSO</span>
-        <span ng-click="changeColor('white')" class="label label-default">NO</span>
+        <span ng-click="changeColor('red')" class="label label-danger">URGENT</span>
+        <span ng-click="changeColor('yellow')" class="label label-warning">LOW PRIO</span>
+        <span ng-click="changeColor('green')" class="label label-success">TESTED</span>
+        <span ng-click="changeColor('blue')" class="label label-primary">VERIFIED</span>
+        <span ng-click="changeColor('white')" class="label label-default">DEFAULT</span>
       </div>
-
-      <hr>
-      <div ng-hide="contentEdit" class="ng-hide card-content">
-        <p>{{ story.content }}</p>
-        <span ng-show="show" ng-click="editContent()" class="glyphicon glyphicon-pencil"></span>
-      </div>
-      
-      <div ng-show="contentEdit" class="card-content">
-        <textarea ng-model="card.content" class="form-control" rows="3"></textarea>
-        <button ng-click="saveContent(content)" type="button" class="btn btn-primary btn-sm">Save</button>
-        <button ng-click="cancelContent()" type="button" class="btn btn-default btn-sm">Cancel</button>
-      </div>
-
     </div>
   </script>  
 

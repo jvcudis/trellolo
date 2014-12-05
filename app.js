@@ -17,11 +17,6 @@ anngularApp.config([
 				url: '/board',
 				templateUrl: '/board.html',
 				controller: 'BoardCtrl'
-			})
-			.state('stories', {
-				url: '/stories/{id}',
-				templateUrl: '/stories.html',
-				controller: 'StoryController'
 			});
 
 		$urlRouterProvider.otherwise('board');

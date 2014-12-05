@@ -2,7 +2,7 @@ var appDirectives = angular.module('appDirectives', []);
 
 appDirectives.directive('cardBox', function() {
   return {
-    restrict: 'E',
+    restrict: 'EA',
     replace: true,
     scope: {
       story: '=',
@@ -22,7 +22,7 @@ appDirectives.directive('cardBox', function() {
 
       $scope.saveTitle = function() {
         $scope.titleEdit = false;
-        $scope.story.title =  $scope.card.title;
+        $scope.story.title =  $scope.card.title || $scope.story.title;
       }
 
       $scope.cancelTitle = function() {
@@ -52,7 +52,7 @@ appDirectives.directive('cardBox', function() {
         $scope.trash()(story);
       }
     },
-    link: function(scope, element, attr, controller) {
+    link: function(scope, element, attrs, controller) {
       // Handle clearing the board by manually deleting the card directive
       // Find a better way to implement this next century
       scope.$watch('story.status', function(val) {
