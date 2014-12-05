@@ -1,4 +1,6 @@
 trellolo
 ========
 
-A Trello application clone using AngularJS + Bootstrap + LocalStorage
+A Trello application clone using AngularJS + Bootstrap + LocalStorage.
+
+This is a static page so no need to run anything just to use this application. You only need an internet connection. To run, click on index.html.
