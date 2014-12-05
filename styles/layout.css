@@ -35,8 +35,8 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 100px;
-  background-color: #ECF0F1;
+  min-height: 80px;
+  background-color: #2C3E50;
 }
 
 /* Nav bar styles
@@ -47,4 +47,11 @@ body {
 
 .navbar-brand {
   color: #F1C40F;
+}
+
+/* Scrollbar styles
+-------------------------------------------------- */
+.nicescroll-cursors {
+  background-color: #16A085 !important;
+  border-color: #16A085 !important;
 }

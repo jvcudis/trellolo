@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" ng-app="anngularApp">
   <head>
@@ -18,13 +17,6 @@
     <!-- Flat UI -->
     <link href="vendors/flatui/css/flat-ui.css" rel="stylesheet">
     <link href="vendors/flatui/img/favicon.ico" rel="shortcut icon">
-
-    <!-- Flatby UI -->
-    <!-- <link href="vendors/flatby/stylesheets/screen.css" rel="stylesheet">
-    <link href="vendors/flatby/stylesheets/fonts.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-     -->  
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,7 +28,8 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
-
+    <script src="vendors/jquery-ui/nicescroll/jquery.nicescroll.min.js"></script>
+    
     <!-- Angular scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular-resource.min.js"></script>
@@ -49,6 +42,7 @@
     <script src="services/appService.js" type="text/javascript"></script>
     <script src="controllers/appController.js" type="text/javascript"></script>
     <script src="directives/cardbox.js" type="text/javascript"></script>
+    <script src="directives/niceScroll.js" type="text/javascript"></script>
     <script src="app.js" type="text/javascript"></script>
   </head>
 
@@ -87,7 +81,7 @@
               <button ng-click="addStory('backlog', sortedStories['backlog'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
               <button ng-click="clearBoard('backlog')" type="button" class="btn btn-default btn-sm">Clear Board</button>
             </p>
-            <div ui-sortable="sortableStories[0]" ng-model="sortedStories['backlog']" class="story-container">
+            <div ui-sortable="sortableStories[0]" nice-scroll ng-model="sortedStories['backlog']" class="story-container">
               <card-box ng-repeat="story in sortedStories['backlog'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
             </div>
           </div>
@@ -100,7 +94,7 @@
               <button ng-click="addStory('in_progress', sortedStories['in_progress'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
               <button ng-click="clearBoard('in_progress')" type="button" class="btn btn-default btn-sm">Clear Board</button>
             </p>
-            <div ui-sortable="sortableStories[1]" ng-model=" sortedStories['in_progress']" class="story-container">
+            <div ui-sortable="sortableStories[1]" nice-scroll ng-model=" sortedStories['in_progress']" class="story-container">
               <card-box ng-repeat="story in sortedStories['in_progress'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
             </div>
           </div>
@@ -113,7 +107,7 @@
               <button ng-click="addStory('done', sortedStories['done'].length)" type="button" class="btn btn-primary btn-sm">Add Card</button>
               <button ng-click="clearBoard('done')" type="button" class="btn btn-default btn-sm">Clear Board</button>
             </p>
-            <div ui-sortable="sortableStories[2]" ng-model="sortedStories['done']" class="story-container">
+            <div ui-sortable="sortableStories[2]" nice-scroll ng-model="sortedStories['done']" class="story-container">
               <card-box ng-repeat="story in sortedStories['done'] | orderBy: ['rank']" story="story" trash="trashStory"></card-box>
             </div>
           </div>
@@ -121,14 +115,16 @@
 
       </div>
     </div> <!-- /container -->
-    <footer class="footer"> <!-- footer -->
-      <div class="container-fluid">
-        <button ng-click="judiciousPurging()" type="button" class="btn btn-default btn-lg btn-trash">
+
+    <footer class="container-fluid footer" id="trash-container">
+      <div nice-scroll class="row">
+        <button ng-click="judiciousPurging()" type="button" class="btn btn-danger btn-lg btn-trash">
           <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         </button>
-        <deleted-card-box ng-repeat="story in sortedStories['deleted']" story="story" remove="removeStory"></deleted-card-box>
+        <deleted-card-box ng-repeat="story in sortedStories['deleted']" story="story" remove="removeStory">
+        </deleted-card-box>
       </div>
-    </footer> <!-- /footer -->
+    </footer>
   </script>
 
   <script type="text/ng-template" id="/stories.html">
@@ -191,8 +187,13 @@
   </script>  
 
   <script type="text/ng-template" id="/deleted_card.html">
-    <div>
-      {{story.title}} - {{story.status}} <span ng-click="removeStory(story)">Delete Me</span>
+    <div class="col-md-2 deleted-card">
+      <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="tile">
+        <h6>
+          {{story.title}}
+          <span ng-click="removeStory(story)" ng-show="show" class="glyphicon glyphicon-trash"></span>
+        </h6>
+      </div>
     </div>
   </script>
 </html>

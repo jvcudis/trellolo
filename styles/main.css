@@ -7,10 +7,17 @@
   border: 1px solid #2C3E50;
   border-radius: 5px;
   text-align: center;
+  margin-bottom: 80px;
+  padding-bottom: 20px;
 }
 
 .board h4 {
   color: #ECF0F1;
+}
+
+.board .story-container {
+  max-height: 700px;
+  width: 100%;
 }
 
 .board .btn-default {
@@ -24,9 +31,12 @@
 
 /* Trash Bin Styling */
 .footer .btn-trash {
-  padding: 26px 25px;
+  position: absolute;
+  top: 0;
+  padding: 19px 17px;
+  margin-left: -85px;
   border-radius: 0px;
-  margin-left: -15px;
+  z-index: 1;
 }
 
 .footer .btn-trash span {
@@ -137,4 +147,44 @@
 
 .card-content .form-group {
   margin-bottom: 10px !important;
+}
+
+#trash-container{
+  height: auto; 
+   
+}
+#trash-container > .row {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-left: 70px;
+  bottom: 0;
+}    
+#trash-container > .row [class*="col-lg"], #trash-container > .row [class*="col-md"], #trash-container > .row [class*="col-sm"] {
+    float:none;
+    display:inline-block;
+}
+
+.deleted-card {
+  margin: 0;
+  padding: 0 5px; 
+}
+
+.deleted-card .tile {
+  padding: 5px;
+  background-color: #34495E;
+  border: 1px solid ##7F8C8D;
+  text-align: left;
+}
+
+.deleted-card .tile h6 {
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.deleted-card .tile h6 > span{
+  float: right;
+  padding-right: 10px;
+  cursor: pointer;
 }

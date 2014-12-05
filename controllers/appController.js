@@ -7,9 +7,6 @@ appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage',
 		$scope.stories = $rootScope.$storage.stories;
 		$scope.sortedStories = {};
 
-		console.log("STORAGE");
-		console.log($rootScope.$storage);
-
 		sortStories = function(boardName) {
 			var _boardName = boardName || 'backlog';
 			$scope.sortedStories[_boardName] = _.filter($scope.stories, function(obj) {
