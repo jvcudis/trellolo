@@ -1,11 +1,25 @@
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage', 'stories',
-	function($rootScope, $scope, $localStorage, stories) {
+appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage', '$modal', 'stories',
+	function($rootScope, $scope, $localStorage, $modal, stories) {
 
 		stories.initialize();
 		$scope.stories = $rootScope.$storage.stories;
 		$scope.sortedStories = {};
+
+    // Trellolo Wiz: set variable for initial loading
+    if($rootScope.$storage.wiz == null) {
+      $rootScope.$storage.wiz = { value: false };
+    }
+
+    if($rootScope.$storage.wiz.value == false) {
+      $modal.open({
+        templateUrl: '/wizard.html',
+        controller: 'WizardCtrl',
+        size: 'lg',
+        backdrop: 'static'
+      });
+    }
 
 		sortStories = function(boardName) {
 			var _boardName = boardName || 'backlog';

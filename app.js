@@ -5,6 +5,7 @@ var anngularApp = angular.module('anngularApp', [
 	'appDirectives',
 	'ui.router',
 	'ngStorage',
+	'ui.bootstrap',
 	'ui.sortable'
 ]);
 
