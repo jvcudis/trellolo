@@ -47,9 +47,9 @@ appDirectives.directive('cardBox', function() {
         $scope.story.color = color;
       }
 
-      $scope.trashStory = function(story) {
+      $scope.trashStory = function(story, oldStatus) {
         $scope.story.status = 'deleted';
-        $scope.trash()(story);
+        $scope.trash()(story, oldStatus);
       }
     },
     link: function(scope, element, attrs, controller) {

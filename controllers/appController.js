@@ -78,13 +78,14 @@ appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage',
   		});
   	}
 
-  	$scope.trashStory = function(story) {
+  	$scope.trashStory = function(story, oldStatus) {
 			if(story == undefined || story == null) {
 				return;
 			}
-	    
-	    story.status = 'deleted';
+     
+      story.status = 'deleted';
 	    $scope.sortedStories['deleted'].push(story);
+      sortStories(oldStatus);
     }
 
 		$scope.removeStory = function(story) {

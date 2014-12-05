@@ -136,7 +136,7 @@
   <script type="text/ng-template" id="/card.html">
     <div ng-mouseenter="show=true" ng-mouseleave="show=false" class="story alert alert-warning {{story.color}}-card">
       
-      <button ng-show="show" ng-click="trashStory(story)" type="button" class="close" data-dismiss="alert">
+      <button ng-show="show" ng-click="trashStory(story, story.status)" type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
