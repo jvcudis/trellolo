@@ -72,3 +72,10 @@ body {
 .modal-content .modal-body > p strong {
   color: #D9534F;
 }
+
+/* Alert styles
+-------------------------------------------------- */
+.alert {
+  background-color: #1abc9c;
+  margin: 0px 15px;
+}

@@ -31,8 +31,9 @@ appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage',
 		createOptions = function(boardName) {
   		var _boardName = boardName || 'backlog';
     	var options = {
-      	placeholder: 'story',
+      	placeholder: 'alert',
       	connectWith: '.story-container',
+        'ui-floating': true, 
       	items: $scope.sortedStories[_boardName],
       	update: function(event, ui) {
       		ui.item.sortable.model.status = _boardName;
@@ -42,10 +43,10 @@ appControllers.controller('BoardCtrl', ['$rootScope', '$scope', '$localStorage',
       		
       		// Update rank of other items
       		// I'm not liking this solution. TO BE IMPROVED next year
-      		var _cnt = ui.item.sortable.model.rank;
-      		while (_cnt < $scope.sortedStories[_boardName].length) {
+          var _cnt = ui.item.sortable.model.rank;
+          while (_cnt < $scope.sortedStories[_boardName].length && _cnt >= 0) {
       			var rankCnt = _cnt;
-      			$scope.sortedStories[_boardName][_cnt++].rank = rankCnt;
+          	$scope.sortedStories[_boardName][_cnt++].rank = rankCnt;
       		}
 				}
     	};

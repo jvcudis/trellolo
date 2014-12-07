@@ -150,14 +150,16 @@
         </div>
         
         <div ng-show="titleEdit" class="title-form">
-          <div class="form-group col-md-8 form-group-sm" ng-class="{'has-error': card.title == '' }">
-            <input ng-model="card.title" type="text" class="form-control input-sm">
-            <span class="error" ng-show="card.title == ''">
-              Title is required.
-            </span>
-          </div>
-          <button ng-click="saveTitle(title)" ng-disabled="card.title == ''" type="button" class="btn btn-primary btn-xs">Save</button>
-          <button ng-click="cancelTitle()" type="button" class="btn btn-default btn-xs">Cancel</button>
+          <form ng-submit="saveTitle(title)">
+            <div class="form-group col-md-8 form-group-sm" ng-class="{'has-error': card.title == '' }">
+              <input ng-model="card.title" type="text" class="form-control input-sm">
+              <span class="error" ng-show="card.title == ''">
+                Title is required.
+              </span>
+            </div>
+            <button ng-click="saveTitle(title)" ng-disabled="card.title == ''" type="submit" class="btn btn-primary btn-xs">Save</button>
+            <button ng-click="cancelTitle()" type="button" class="btn btn-default btn-xs">Cancel</button>
+          </form>
         </div>
       </div>
      
@@ -170,11 +172,13 @@
         </div>
         
         <div ng-show="contentEdit" class="content-form">
-          <div class="form-group form-group-sm">
-            <textarea ng-model="card.content" class="form-control" rows="3"></textarea>
-          </div>
-          <button ng-click="saveContent(content)" type="button" class="btn btn-primary btn-xs">Save</button>
-          <button ng-click="cancelContent()" type="button" class="btn btn-default btn-xs">Cancel</button>
+          <form ng-submit="saveContent(content)">
+            <div class="form-group form-group-sm">
+              <textarea ng-model="card.content" class="form-control" rows="3"></textarea>
+            </div>
+            <button ng-click="saveContent(content)" type="button" class="btn btn-primary btn-xs">Save</button>
+            <button ng-click="cancelContent()" type="submit" class="btn btn-default btn-xs">Cancel</button>
+          </form>
         </div>
       </div>
 
